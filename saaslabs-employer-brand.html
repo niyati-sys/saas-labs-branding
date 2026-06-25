@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SaaS Labs · Life & Culture</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #09090b;
+      --bg2: #0f0f11;
+      --bg3: #141416;
+      --border: #27272a;
+      --accent: #16a249;
+      --accent2: #36d399;
+      --green: #1fe066;
+      --text: #fafafa;
+      --muted: #a1a1aa;
+      --card: #111113;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(9,9,11,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      gap: 0;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      margin-right: auto;
+    }
+
+    .nav-logo-mark {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      margin-right: 32px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(22,162,73,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(22,162,73,0.12);
+      border: 1px solid rgba(22,162,73,0.35);
+      color: #36d399;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #5B6CF9;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      max-width: 840px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #16a249, #36d399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 72px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+    }
+
+    .stat {
+      padding: 24px 40px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 500;
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+    }
+
+    .ticker {
+      display: flex;
+      gap: 48px;
+      animation: ticker 28s linear infinite;
+      width: max-content;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .ticker-item .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      padding: 96px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 600px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    /* ─── PILLARS ─── */
+    .pillars {
+      display: grid;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .pillar {
+      background: var(--card);
+      padding: 40px 36px;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 24px;
+      align-items: start;
+      transition: background 0.2s;
+    }
+    .pillar:hover { background: #14142A; }
+
+    .pillar-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      padding-top: 4px;
+    }
+
+    .pillar-content h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .pillar-content p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* ─── VALUES ─── */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .value-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .value-card:hover {
+      border-color: rgba(22,162,73,0.4);
+      transform: translateY(-2px);
+    }
+
+    .value-icon {
+      font-size: 26px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .value-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .value-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── DARK BAND ─── */
+    .dark-band {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ─── PERKS ─── */
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .perk {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .perk-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: rgba(22,162,73,0.12);
+      border: 1px solid rgba(22,162,73,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .perk h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .perk p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── PROCESS ─── */
+    .process-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      left: 22px; top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 24px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-body {}
+    .step-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .step-body h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .step-body p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .testimonial {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      color: #C8C8E0;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testimonial-text::before { content: '"'; }
+    .testimonial-text::after { content: '"'; }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .author-role {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── FAQ ─── */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+    }
+    .faq-item:last-child { border-bottom: none; }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 28px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      user-select: none;
+      gap: 20px;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: #36d399; }
+
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+      color: var(--muted);
+      transition: transform 0.2s;
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      color: var(--accent);
+      border-color: rgba(22,162,73,0.4);
+    }
+
+    .faq-a {
+      display: none;
+      padding: 0 28px 22px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ─── QUICK INFO ─── */
+    .quick-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 48px;
+    }
+
+    .info-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ─── CTA ─── */
+    .cta-section {
+      text-align: center;
+      padding: 96px 24px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 40px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ─── GRID SPLIT ─── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero-stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      section { padding: 64px 20px; }
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Products strip */
+    .products-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 48px;
+    }
+    .product-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(22,162,73,0.08);
+      border: 1px solid rgba(22,162,73,0.25);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #36d399;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .product-tag:hover { background: rgba(22,162,73,0.15); }
+    .product-tag .arrow { font-size: 11px; opacity: 0.7; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">SL</div>
+    <span class="nav-logo-text">SaaS Labs</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#opportunity">The Opportunity</a></li>
+    <li><a href="#culture">Culture</a></li>
+    <li><a href="#perks">Perks</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#faq">FAQs</a></li>
+  </ul>
+  <a href="https://careers.kula.ai/saas-labs" target="_blank" class="nav-cta">See Open Roles →</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="hero">
+  <div class="hero-badge">Employer Brand · Life at SaaS Labs</div>
+  <h1>Build AI that<br /><span>changes how the world works.</span></h1>
+  <p class="hero-sub">We're an AI-first company on a mission to revolutionize business communication — and we're looking for people who want to do the best work of their careers.</p>
+  <div class="hero-actions">
+    <a href="https://careers.kula.ai/saas-labs" target="_blank" class="btn-primary">View Open Roles</a>
+    <a href="#culture" class="btn-ghost">Explore our culture →</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">AI-Enhanced Products</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">6,000+</span>
+      <span class="stat-label">Global Customers</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">500+</span>
+      <span class="stat-label">Team Members</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">50+</span>
+      <span class="stat-label">Countries Served</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── TICKER ─── -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><span class="dot"></span> Alibaba</span>
+    <span class="ticker-item"><span class="dot"></span> HelloFresh</span>
+    <span class="ticker-item"><span class="dot"></span> Walmart</span>
+    <span class="ticker-item"><span class="dot"></span> McGraw Hill</span>
+    <span class="ticker-item"><span class="dot"></span> Jaguar</span>
+    <span class="ticker-item"><span class="dot"></span> Backed by Peak XV</span>
+    <span class="ticker-item"><span class="dot"></span> JustCall</span>
+    <span class="ticker-item"><span class="dot"></span> AtomsAI</span>
+    <span class="ticker-item"><span class="dot"></span> ServiceAgent</span>
+    <span class="ticker-item"><span class="dot"></span> Helpwise</span>
+    <span class="ticker-item"><span class="dot"></span> CallPage</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span class="dot"></span> Alibaba</span>
+    <span class="ticker-item"><span class="dot"></span> HelloFresh</span>
+    <span class="ticker-item"><span class="dot"></span> Walmart</span>
+    <span class="ticker-item"><span class="dot"></span> McGraw Hill</span>
+    <span class="ticker-item"><span class="dot"></span> Jaguar</span>
+    <span class="ticker-item"><span class="dot"></span> Backed by Peak XV</span>
+    <span class="ticker-item"><span class="dot"></span> JustCall</span>
+    <span class="ticker-item"><span class="dot"></span> AtomsAI</span>
+    <span class="ticker-item"><span class="dot"></span> ServiceAgent</span>
+    <span class="ticker-item"><span class="dot"></span> Helpwise</span>
+    <span class="ticker-item"><span class="dot"></span> CallPage</span>
+  </div>
+</div>
+
+<!-- ─── OPPORTUNITY ─── -->
+<section id="opportunity">
+  <div class="section-label">The Opportunity</div>
+  <h2>Three reasons this<br />isn't just another job.</h2>
+  <p class="section-sub">SaaS Labs sits at the intersection of AI, communication, and scale. You won't be a cog — you'll own things that matter.</p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-content">
+        <h3>You're building at the AI frontier</h3>
+        <p>Our products — JustCall, AtomsAI, ServiceAgent, Helpwise, CallPage — are live, used by thousands of businesses daily, and increasingly AI-native. You'll work on real AI problems, not demo projects. We don't treat AI as a side experiment; we actively build it into how we think, operate, and scale.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-content">
+        <h3>You'll have real ownership from day one</h3>
+        <p>We trust you to run with things. "Internalize CEO mindset" isn't a slogan — it's how decisions get made here. Every project, every risk, every outcome has someone's name on it. That name could be yours. We're lean enough that what you do visibly moves the needle.</p>
+      </div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-content">
+        <h3>You'll grow at the pace of the company</h3>
+        <p>SaaS Labs is backed by Peak XV and growing fast. The company's trajectory means there are new challenges — and new roles — opening constantly. People who join early and perform don't stay in the same box for long. We promote from within, and we mean it.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-strip">
+    <a href="https://justcall.io" target="_blank" class="product-tag">JustCall <span class="arrow">↗</span></a>
+    <a href="https://atomsai.com" target="_blank" class="product-tag">AtomsAI <span class="arrow">↗</span></a>
+    <a href="https://serviceagent.ai" target="_blank" class="product-tag">ServiceAgent <span class="arrow">↗</span></a>
+    <a href="https://helpwise.io" target="_blank" class="product-tag">Helpwise <span class="arrow">↗</span></a>
+    <a href="https://callpage.io" target="_blank" class="product-tag">CallPage <span class="arrow">↗</span></a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── CULTURE ─── -->
+<section id="culture">
+  <div class="section-label">Culture & Values</div>
+  <h2>What makes us tick.</h2>
+  <p class="section-sub">Our values aren't aspirational posters — they're the filter through which we hire, promote, and make decisions every day.</p>
+
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-icon">🤝</span>
+      <h3>Team up for success</h3>
+      <p>We believe in the power of working together. Brainstorming sparks breakthroughs, and every win belongs to the whole team — not just the person who shipped it.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">📈</span>
+      <h3>Raise the bar</h3>
+      <p>Excellence isn't optional — it's the standard. We get better every day, push past "good enough," and never settle when "great" is within reach.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🧠</span>
+      <h3>Internalize CEO mindset</h3>
+      <p>We trust you to own your work and run with it. Every decision you make, every project you lead, every risk you take — it's yours to own. No hand-holding.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">⚡</span>
+      <h3>Breathe action</h3>
+      <p>Perfect planning takes too long — we'd rather take imperfect action and iterate our way to excellence. Bias for doing, not discussing.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">💜</span>
+      <h3>Embed customer focus</h3>
+      <p>Customer-first isn't just a motto — it's how we work. We understand needs deeply, act with empathy, and obsess over making things better for everyone we serve.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🤖</span>
+      <h3>If AI can, AI should</h3>
+      <p>We actively build AI into how we think, operate, and scale. It's not a side experiment — it's the lens through which every team looks at their work.</p>
+    </div>
+  </div>
+</section>
+
+<div class="dark-band">
+  <!-- ─── LIFE AT SAAS LABS QUOTE ─── -->
+  <section style="text-align: center; max-width: 760px;">
+    <div class="section-label">Our mission</div>
+    <h2 style="margin-bottom: 24px;">"Sales and support teams need a savior, and we can deliver."</h2>
+    <p style="font-size: 17px; color: var(--muted); line-height: 1.75;">We champion the user and put them at the center of all our decision-making. We take care of our team so they can focus on customers — not on clunky software or bureaucracy.</p>
+    <div class="quick-info" style="justify-content: center; margin-top: 40px;">
+      <div class="info-chip">📍 San Francisco · Noida</div>
+      <div class="info-chip">🌍 Remote-friendly</div>
+      <div class="info-chip">🚀 AI-First since day one</div>
+      <div class="info-chip">💰 Backed by Peak XV</div>
+    </div>
+  </section>
+</div>
+
+<!-- ─── PERKS ─── -->
+<section id="perks">
+  <div class="section-label">The Crew Rewards</div>
+  <h2>What you get for showing up.</h2>
+  <p class="section-sub">We don't believe in perks as a substitute for good work and fair pay. These are on top of both.</p>
+
+  <div class="perks-grid">
+    <div class="perk">
+      <div class="perk-icon">🏖️</div>
+      <div>
+        <h4>Guilt-free time off</h4>
+        <p>Take time off when life calls. We trust you to balance your energy and schedule responsibly — no counting days.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🕐</div>
+      <div>
+        <h4>Flexible hours</h4>
+        <p>We measure results, not hours. Work when you're most productive, as long as you show up for your team.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🌏</div>
+      <div>
+        <h4>Work from anywhere</h4>
+        <p>Up to 12 days a year to work from wherever you feel most inspired. Flexibility that fits your rhythm.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">🎉</div>
+      <div>
+        <h4>Annual all-hands offsite</h4>
+        <p>Once a year, we pick somewhere incredible and bring the whole crew together to celebrate and recharge.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">💰</div>
+      <div>
+        <h4>Square deal, always</h4>
+        <p>We pay you what you're worth — no games, no surprises. Compensation that matches what top companies offer.</p>
+      </div>
+    </div>
+    <div class="perk">
+      <div class="perk-icon">❤️</div>
+      <div>
+        <h4>Care, not checklist</h4>
+        <p>Comprehensive benefits covering the well-being of you and your family — physical, mental, and everything in between.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROCESS ─── -->
+<section id="process">
+  <div class="split">
+    <div>
+      <div class="section-label">Interview Process</div>
+      <h2>Every great journey starts with a first step.</h2>
+      <p class="section-sub">Here's what to expect after you apply. Most roles complete the full process in 3–4 weeks.</p>
+      <div class="quick-info">
+        <div class="info-chip">⏱️ ~3–4 weeks end to end</div>
+        <div class="info-chip">🎯 Focus on real skills</div>
+        <div class="info-chip">🤝 No trick questions</div>
+      </div>
+    </div>
+    <div class="process-steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <div class="step-tag">Application</div>
+          <h3>Apply & Recruiter Screen</h3>
+          <p>A short call to understand your background, what you're looking for, and whether this role is the right fit. A chance for both of us to ask questions.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <div class="step-tag">Assessment</div>
+          <h3>Skills-Based Task</h3>
+          <p>A practical exercise relevant to the role — not an abstract puzzle, but something that resembles real work. A few days to complete at your own pace.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <div class="step-tag">Interview</div>
+          <h3>Hiring Manager Round</h3>
+          <p>A deep dive into your experience, approach to problem-solving, and how you'd operate in the role. We want to understand how you think, not just what you've done.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-body">
+          <div class="step-tag">Culture</div>
+          <h3>Values & Leadership Round</h3>
+          <p>A conversation with a senior leader focused on alignment with our values, working style, and long-term fit. This is also your chance to pressure-test us.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div class="step-body">
+          <div class="step-tag">Offer</div>
+          <h3>Reference Check & Offer</h3>
+          <p>We'll speak with a couple of past colleagues, then evaluate your overall candidacy and make an offer. Welcome to the crew.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="dark-band">
+  <!-- ─── TESTIMONIALS ─── -->
+  <section id="team" style="max-width: 1100px;">
+    <div class="section-label">Hear from the team</div>
+    <h2>Don't take our word for it.</h2>
+    <p class="section-sub" style="margin-bottom: 40px;">A few perspectives from people who are here, doing the work.</p>
+
+    <div class="testimonials">
+      <div class="testimonial">
+        <p class="testimonial-text">The ownership here is real. Within two months I was leading a product decision that affected thousands of customers. No one told me to wait my turn — they just trusted me to do it.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #16a249, #36d399);">AR</div>
+          <div>
+            <div class="author-name">Ananya R.</div>
+            <div class="author-role">Senior Product Manager · Noida</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">I've worked at bigger companies. The difference here is speed — ideas go from whiteboard to shipped in weeks. And the AI-first approach means we're building things that genuinely didn't exist before.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #1fe066, #16a249);">MK</div>
+          <div>
+            <div class="author-name">Marcus K.</div>
+            <div class="author-role">Engineering Lead · San Francisco</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial">
+        <p class="testimonial-text">What stood out was how much the company cares about outcomes over optics. Flexible hours aren't a perk — they're just how we work. It makes it easy to do your best work.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #D97706);">SP</div>
+          <div>
+            <div class="author-name">Siya P.</div>
+            <div class="author-role">Customer Success · Noida</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ─── FAQ ─── -->
+<section id="faq">
+  <div class="section-label">FAQs</div>
+  <h2>Things candidates usually ask.</h2>
+  <p class="section-sub" style="margin-bottom: 40px;">Still have questions? Your recruiter call is the best place to ask anything not covered here.</p>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        Is SaaS Labs remote-friendly?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">We're hybrid by default. Most roles are based in our San Francisco or Noida offices, with flexibility built in — including up to 12 work-from-anywhere days per year. Specific remote arrangements depend on the role and team. Your recruiter will clarify during the screening call.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        What does "AI-First" actually mean for day-to-day work?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">It means AI is a first-class consideration in every decision — not just in product, but in how teams operate, how we write, how we analyse, and how we automate. You're expected to use AI tools actively and to look for ways to build AI into your workflows. If AI can do it, AI should.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        How does compensation work?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">We benchmark against top companies in our tier and aim to be competitive without playing games. Offers are based on role, level, location, and experience. We're transparent in the process — you'll know the range before you reach offer stage.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        How quickly do people grow here?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Fast, if you perform. The company is growing quickly, which means new challenges and new roles open up constantly. We promote from within wherever we can. People who join early and take ownership tend to grow faster here than at most companies their size.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        What is the culture around feedback?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Direct and candid. We don't do passive feedback — if something's off, you'll hear it quickly. Equally, if you're doing great work, you'll hear that too. We believe candour is a form of respect, and we try to practise it across all levels.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggle(this)">
+        What does the assessment / take-home task involve?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">It varies by role, but always resembles real work — not abstract puzzles. You'll typically be assessed on how you think through a problem, how you structure your approach, and the quality of your output. Full details are shared when you reach that stage. We respect your time and keep tasks scoped appropriately.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<div class="cta-section">
+  <div class="section-label" style="margin-bottom: 20px;">Ready?</div>
+  <h2>Join us in pushing the<br />boundaries of the SaaS world.</h2>
+  <p>We're hiring across engineering, product, design, sales, and operations.</p>
+  <a href="https://careers.kula.ai/saas-labs" target="_blank" class="btn-primary" style="font-size: 15px; padding: 16px 36px;">See Open Roles →</a>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <a href="https://saaslabs.co" class="footer-logo">
+    <div class="nav-logo-mark">SL</div>
+    <span class="nav-logo-text">SaaS Labs</span>
+  </a>
+  <div class="footer-links">
+    <a href="https://www.saaslabs.co/about">About</a>
+    <a href="https://www.saaslabs.co/careers">Careers</a>
+    <a href="https://justcall.io/blog/">Blog</a>
+    <a href="https://x.com/saas_labs">Twitter</a>
+    <a href="https://in.linkedin.com/company/saas-labs">LinkedIn</a>
+  </div>
+  <span class="footer-copy">© 2026 SaaS Labs US, Inc. All rights reserved.</span>
+</footer>
+
+<script>
+  function toggle(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
